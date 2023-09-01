@@ -1,1 +1,9 @@
-{ "firstName": "dmytro", "lastName": "kosenko", "age": 32, "city": "Kyiv" }
+{
+  "firstName": "dmytro",
+  "lastName": "kosenko",
+  "age": 32,
+  "city": "Kyiv",
+  "createdAt": "2023-09-01T11:11:01.530Z",
+  "test": "test",
+  "email": "test@gmail.com"
+}
