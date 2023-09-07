@@ -1,4 +1,4 @@
-let arr1 = ["index1", "index2", "index3", true, 74, 15, "hello", false];
+//let arr1 = ["index1", "index2", "index3", true, 74, 15, "hello", false];
 
 // let value = arr1[2];
 // console.log(value);
@@ -22,8 +22,8 @@ let arr1 = ["index1", "index2", "index3", true, 74, 15, "hello", false];
 
 // console.log(arr2.at(-2));
 
-let arrLength1 = arr1.length;
-console.log(arrLength1);
+// let arrLength1 = arr1.length;
+// console.log(arrLength1);
 
 //work with array
 
@@ -47,23 +47,40 @@ console.log(arrLength1);
 
 //previouse realization as a function
 
-async function getOnlyString(baseArr) {
-  let result = [];
-  let resultWithUpperCase = [];
+// async function getOnlyString(baseArr) {
+//   let result = [];
+//   let resultWithUpperCase = [];
 
-  for (let i = 0; i < baseArr.length; i++) {
-    if (typeof arr1[i] === "string") {
-      await result.push(baseArr[i]);
-    }
-  }
+//   for (let i = 0; i < baseArr.length; i++) {
+//     if (typeof arr1[i] === "string") {
+//       await result.push(baseArr[i]);
+//     }
+//   }
 
-  for (let y = 0; y < result.length; y++) {
-    let word = result.at(y);
-    let firstLetter = await String(word[0]).toUpperCase();
-    let restLetter = await String(word.slice(3));
-    await resultWithUpperCase.push(firstLetter + restLetter);
+//   for (let y = 0; y < result.length; y++) {
+//     let word = result.at(y);
+//     let firstLetter = await String(word[0]).toUpperCase();
+//     let restLetter = await String(word.slice(3));
+//     await resultWithUpperCase.push(firstLetter + restLetter);
+//   }
+//   console.log(resultWithUpperCase);
+// }
+
+//getOnlyString(arr1);
+
+//Arrays in array
+let newArr4 = [
+  [1, 2, 3, 4, 5, "Shrek"],
+  [6, 7, 8],
+  [9, 10],
+];
+
+let newShrek = newArr4[0][5];
+console.log(newShrek);
+
+for (let i = 0; i < newArr4.length; i++) {
+  let arr11 = newArr4[i];
+  for (let j = 0; j < arr11.length; j++) {
+    console.log(arr11[j]);
   }
-  console.log(resultWithUpperCase);
 }
-
-getOnlyString(arr1);
