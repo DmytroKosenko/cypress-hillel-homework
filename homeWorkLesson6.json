@@ -1,1 +1,8 @@
-{"firstName":"dmytro","lastName":"kosenko","age":32,"city":"Kyiv","address":"Address","email":"myEmail@gmail.com"}
+{
+  "firstName": "dmytro",
+  "lastName": "kosenko",
+  "age": 32,
+  "city": "Kyiv",
+  "address": "Address",
+  "email": "myEmail@gmail.com"
+}

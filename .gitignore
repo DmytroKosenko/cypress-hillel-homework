@@ -2,3 +2,6 @@ node_modules/
 mochawesome-report/
 package-lock.json
 package.json
+.yarn
+.yarnrc.yml
+yarn.lock
