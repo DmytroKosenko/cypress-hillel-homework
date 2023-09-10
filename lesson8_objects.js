@@ -70,3 +70,5 @@ const myObj3 = {
     },
   ],
 };
+
+console.log(myObj3.mailAddressArr[0].mail_pass);

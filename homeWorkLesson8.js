@@ -50,3 +50,29 @@ async function createUser(path, newUser) {
 }
 
 createUser(addUserPath, newUser);
+
+//-- second variant
+//use the file from the attachments
+//create a function with actions: read the json.file => iterate and save all names into array
+
+const fs = require("fs-extra");
+const pathToJson = "./homeWorkLesson8_users.json";
+
+function saveJsonDataToArray(data) {
+  fs.readFile(data, "utf8", (err, path) => {
+    if (err) {
+      console.log(`Error reading file`);
+    } else {
+      const dataFromJsonFile = JSON.parse(path);
+      const namesArray = [];
+      for (let name of dataFromJsonFile.data) {
+        if (name.first_name) {
+          namesArray.push(name.first_name);
+        }
+      }
+      console.log(namesArray);
+    }
+  });
+}
+
+saveJsonDataToArray(pathToJson);
