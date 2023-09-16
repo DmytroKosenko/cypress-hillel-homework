@@ -1,5 +1,9 @@
 const fetch = require("node-fetch");
 const fs = require("fs-extra");
+const log4js = require("log4js");
+
+const logger = log4js.getLogger();
+logger.level = "debug";
 
 let arrName = [];
 async function readJsinAndWhriteName(path) {
@@ -39,8 +43,20 @@ async function createUser(data) {
         "Content-Type": "application/json",
       },
     });
+
+    await logger.debug("request was send successfully");
+
+    //logger example
+    logger.debug("debug");
+    logger.info("info");
+    logger.warn("warn");
+    logger.error("error");
+    logger.fatal("fatal");
+
     const statusCode = await response.status;
     const dataResponse = await response.json();
+
+    logger.debug(statusCode);
 
     console.log(statusCode);
     console.log(dataResponse);
