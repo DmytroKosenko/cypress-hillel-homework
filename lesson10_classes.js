@@ -20,6 +20,7 @@ class User extends Human {
   fingers = 10;
 
   constructor(name, legs, arms, fingers) {
+    super();
     this.name = name;
     this.#legs = legs;
     this.arms = arms;
@@ -102,3 +103,30 @@ console.log(student3.fingers);
 // console.log(nameE);
 // console.log(nameE.planet);
 // console.log(nameE.legs);
+
+//prototype
+let animal = {
+  eats: true,
+  walk() {
+    console.log("Animal is run");
+  },
+  eat() {},
+};
+
+let rabbit = {
+  eats: true,
+  eat() {
+    console.log("rabbit eat some feed");
+  },
+  __proto__: animal, //inharid function from parent object by using 'proto'
+};
+
+rabbit.walk();
+
+let rabbit_2 = {
+  eats: true,
+  __proto__: rabbit, //inharid function from object which inherit them from parent by using 'proto'
+};
+
+rabbit_2.walk();
+rabbit.eat();
