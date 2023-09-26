@@ -5,5 +5,5 @@ package.json
 .yarn
 .yarnrc.yml
 yarn.lock
-cypress/
+.vscode/
 cypress.config.js
