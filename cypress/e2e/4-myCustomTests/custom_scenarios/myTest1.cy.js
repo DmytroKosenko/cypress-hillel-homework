@@ -2,9 +2,9 @@
 
 describe("Testing Guru Website", () => {
   beforeEach(() => {
-    cy.visit("/");
-    cy.setCookie("authCoka", "someCookie");
-    //cy.loginAndSetCookie('/', "authCoka", "someCookie"'); ???
+    // cy.visit('https://www.guru99.com')
+    // cy.setCookie('authCoka', 'someCookie')
+    cy.loginAndSetCookie("/", "authCoka", "someCookie");
   });
 
   it("Open the website", () => {
