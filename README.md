@@ -1,3 +1,2 @@
 # homework
-
-It is test repository for Cypress course.
+This is a demo repository of the Hillel school course for creating tests using Cypress.
