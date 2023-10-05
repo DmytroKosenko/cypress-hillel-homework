@@ -1,6 +1,12 @@
 /// <reference types="cypress" />
+import MainPage from "../../../pages/main";
+import PostmanPage from "../../../pages/postman-page";
+import { global_data } from "../../../data/global_text";
 
 describe("Testing Guru Website", () => {
+  const mainpage = new MainPage();
+  const postmanPage = new PostmanPage();
+
   beforeEach(() => {
     // cy.visit('https://www.guru99.com')
     // cy.setCookie('authCoka', 'someCookie')
@@ -63,12 +69,22 @@ describe("Testing Guru Website", () => {
       debugger;
     });
   });
-  it("Open the software from main page", () => {
+  it.skip("Open the software from main page", () => {
     //cy.get("a[title='Software Testing']").debug();
     cy.get("a[title='Software Testing']");
     cy.log("Open the Software Testing section");
     cy.get("h2").pause();
     cy.task("LOG_INFO", "Another log info message");
     cy.get("table.table").eq(0).pause();
+  });
+
+  it("Click on Postman linck from drop-down list POM", () => {
+    mainpage.dropDownList().eq(0).click().pause();
+    mainpage
+      .elementInDropDownList()
+      .eq(16)
+      .should("have.text", global_data.postman_text)
+      .click();
+    postmanPage.imageWithPostmanDetails({ timeout: 8000 }).should("be.visible");
   });
 });
