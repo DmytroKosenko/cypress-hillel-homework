@@ -1,15 +1,33 @@
-class DouMainPage {
-  visitToPage() {
-    cy.visit("https://dou.ua");
+import { BasePage } from "./dou_BasePageClass";
+import { navigationBarMenu } from "./dou_NavigationBarClass";
+import { salaryPage } from "./dou_SalaryPagesClass";
+import { workPage } from "./dou_WorkPageClass";
+
+export class DouMainPage extends BasePage {
+  constructor() {
+    super();
+    this.mainPageElement = "body > div.g-page";
+  }
+  verifyMainPageElements() {
+    cy.get(this.mainPageElement).should("be.visible");
   }
 
-  getLogoElement() {
-    return cy.get("body > div.g-page > header > ul > li.logo");
+  verifyLogoElementOnMainPage() {
+    navigationBarMenu.getMainLogoElement();
   }
 
-  getSomeElement() {}
+  verifyLogoElementOnSectionsPage() {
+    navigationBarMenu.getSectionsLogoElement();
+  }
 
-  getSomeElement() {}
+  openWorkPage() {
+    navigationBarMenu.switchToWorkPage();
+    workPage.verifyWorkElements();
+  }
+  openSalaryPage() {
+    navigationBarMenu.switchToSalaryPage();
+    salaryPage.verifySalaryTableElement();
+  }
 }
 
-export default new DouMainPage();
+export const douMainPage = new DouMainPage();

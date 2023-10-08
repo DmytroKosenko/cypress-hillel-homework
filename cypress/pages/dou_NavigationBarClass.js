@@ -1,10 +1,31 @@
-export class NavigationMenu {
+export class NavigationBarMenu {
   constructor() {
-    this.mainElement = "#container > div.header > header";
+    this.headerElement = "body > div.g-page > header";
+    this.sectionsLogoElement = "header.b-head";
   }
-  verifyElements() {
-    cy.get(this.mainElement).should("be.visible");
+
+  getMainLogoElement() {
+    cy.get(this.headerElement).find("ul > li").eq(0);
+  }
+
+  getSectionsLogoElement() {
+    cy.get(this.sectionsLogoElement).find(".logo");
+  }
+
+  switchToSalaryPage() {
+    cy.get(this.headerElement).find("ul > li").eq(4).click();
+  }
+
+  switchToWorkPage() {
+    cy.get(this.headerElement).find("ul > li").eq(5).click();
+  }
+
+  goIntoSearchField() {
+    cy.get(this.headerElement).find("#txtGlobalSearch").click();
+  }
+  goToLoginLink() {
+    cy.get(this.headerElement).find("#login-link").click();
   }
 }
 
-export const navigationMenu = new NavigationMenu();
+export const navigationBarMenu = new NavigationBarMenu();
