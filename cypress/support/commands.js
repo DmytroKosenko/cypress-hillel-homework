@@ -28,3 +28,18 @@ Cypress.Commands.add("loginAndSetCookie", (url, cookieN, cookieV) => {
   cy.visit(url);
   cy.setCookie(cookieN, cookieV);
 });
+
+Cypress.Commands.add("loginAndSetLocalStorage", () => {
+  cy.request({
+    method: "POST",
+    url: "http://5.189.186.217/api/auth/login",
+    body: {
+      email: "email@dmytro.com",
+      password: "abc123",
+    },
+  }).then((response) => {
+    const accessToken = response.body.token;
+    // Store the access token in local
+    localStorage.setItem("auth-token", accessToken);
+  });
+});
