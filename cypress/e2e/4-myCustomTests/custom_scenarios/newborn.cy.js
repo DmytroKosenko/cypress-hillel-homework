@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-
+//cypress run --headed -b chrome cypress/e2e/Custom_scenarious/newborn.cy.js
 describe("Login with API request", () => {
   beforeEach(() => {
     cy.loginAndSetLocalStorage();
@@ -9,21 +9,13 @@ describe("Login with API request", () => {
     cy.visit("/overview");
     cy.get("div.card-content").eq(0).should("be.visible");
   });
-});
 
-// cy.request({
-//   method: 'POST',
-//   url: '/api/auth/login',
-//   body: {
-//       email: 'email@dmytro.com',
-//       password: 'abc123'
-//   },
-// }).
-// // then((response) => {
-// //     fs.writeFileSync('check_token.json', JSON.stringify(response))
-// // })
-// then((response) => {
-//   const accessToken = response.body.token;
-//   // Store the access token in local
-//   localStorage.setItem('auth-token', accessToken);
-// });
+  it("create category", () => {
+    cy.createNewCategory("category_1_1_1");
+    cy.visit("/categories");
+    cy.wait(5000);
+    cy.get(".content a.collection-item", { timeout: 3000 }).should(
+      "be.visible"
+    );
+  });
+});

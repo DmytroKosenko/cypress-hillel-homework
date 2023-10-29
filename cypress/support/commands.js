@@ -32,7 +32,7 @@ Cypress.Commands.add("loginAndSetCookie", (url, cookieN, cookieV) => {
 Cypress.Commands.add("loginAndSetLocalStorage", () => {
   cy.request({
     method: "POST",
-    url: "http://5.189.186.217/api/auth/login",
+    url: "/api/auth/login",
     body: {
       email: "email@dmytro.com",
       password: "abc123",
@@ -41,5 +41,22 @@ Cypress.Commands.add("loginAndSetLocalStorage", () => {
     const accessToken = response.body.token;
     // Store the access token in local
     localStorage.setItem("auth-token", accessToken);
+  });
+});
+
+Cypress.Commands.add("createNewCategory", (category) => {
+  const accessToken = window.localStorage.getItem("auth-token");
+
+  cy.request({
+    method: "POST",
+    url: "/api/category",
+    body: {
+      name: category,
+    },
+    headers: {
+      authorization: `${accessToken}`,
+    },
+  }).then((response) => {
+    return response.body;
   });
 });
