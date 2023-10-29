@@ -32,7 +32,7 @@ Cypress.Commands.add("loginAndSetCookie", (url, cookieN, cookieV) => {
 Cypress.Commands.add("loginAndSetLocalStorage", () => {
   cy.request({
     method: "POST",
-    url: "http://5.189.186.217/api/auth/login",
+    url: "/api/auth/login",
     body: {
       email: "email@dmytro.com",
       password: "abc123",
@@ -43,3 +43,41 @@ Cypress.Commands.add("loginAndSetLocalStorage", () => {
     localStorage.setItem("auth-token", accessToken);
   });
 });
+
+Cypress.Commands.add("createNewCategory", (category) => {
+  const accessToken = window.localStorage.getItem("auth-token");
+
+  cy.request({
+    method: "POST",
+    url: "/api/category",
+    body: {
+      name: category,
+    },
+    headers: {
+      authorization: `${accessToken}`,
+    },
+  }).then((response) => {
+    const categoryId = response.body._id;
+  });
+});
+
+Cypress.Commands.add(
+  "createNewProductToCategory",
+  (categoryName, productCost) => {
+    const accessToken = window.localStorage.getItem("auth-token");
+    cy.request({
+      method: "POST",
+      url: "/api/position",
+      body: {
+        category: categoryId,
+        cost: productCost,
+        name: categoryName,
+      },
+      headers: {
+        authorization: `${accessToken}`,
+      },
+    }).then((response) => {
+      expect(response.status).to.eq(201);
+    });
+  }
+);
