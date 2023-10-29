@@ -58,6 +58,7 @@ Cypress.Commands.add("createNewCategory", (category) => {
     },
   }).then((response) => {
     const categoryId = response.body._id;
+    localStorage.setItem("categoryId", categoryId);
   });
 });
 
@@ -65,11 +66,13 @@ Cypress.Commands.add(
   "createNewProductToCategory",
   (categoryName, productCost) => {
     const accessToken = window.localStorage.getItem("auth-token");
+    const categoryId = window.localStorage.getItem("categoryId");
+
     cy.request({
       method: "POST",
       url: "/api/position",
       body: {
-        category: categoryId,
+        category: `${categoryId}`,
         cost: productCost,
         name: categoryName,
       },
