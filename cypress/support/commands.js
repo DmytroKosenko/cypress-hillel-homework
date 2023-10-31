@@ -84,3 +84,7 @@ Cypress.Commands.add(
     });
   }
 );
+
+    return response.body;
+  });
+});
