@@ -5,7 +5,8 @@
 //npm run cy_run_chrome_headed  --spec cypress/e2e/Custom_scenarious/newborn.cy.js
 
 /// <reference types="cypress" />
-//cypress run --headed -b chrome cypress/e2e/Custom_scenarious/newborn.cy.js
+import { faker } from "@faker-js/faker";
+
 describe("Login with API request", () => {
   beforeEach(() => {
     cy.loginAndSetLocalStorage();
@@ -16,39 +17,31 @@ describe("Login with API request", () => {
     cy.get("div.card-content").eq(0).should("be.visible");
   });
 
-
-  it("create category with product", () => {
-    // Create a new category
-    cy.createNewCategory("super_category");
-    cy.visit("/categories");
-    cy.wait(2000);
-    cy.get(".content a.collection-item", { timeout: 3000 }).should(
-      "be.visible"
-    );
-    cy.wait(2000);
-
-    // Add product to new created category
-    cy.createNewProductToCategory("super_product_1", 101);
-    cy.wait(2000);
-    cy.visit("/categories");
-    cy.get(
-      "body > app-root > app-site-layout > main > app-categories-page > div.row > div > div > a:nth-child(404)",
-      { timeout: 3000 }
-    )
-      .should("be.visible")
-      .click();
-    cy.get(
-      "body > app-root > app-site-layout > main > app-categories-form > app-positions-form > div > div > div:nth-child(2) > div > a",
-      { timeout: 3000 }
-    ).should("be.visible");
-    cy.wait(2000);
-
-  it("create category", () => {
-    cy.createNewCategory("category_1_1_1");
+  it("Create category", () => {
+    let categoryName = faker.commerce.product();
+    cy.createNewCategory(categoryName);
+    cy.task("log", categoryName);
     cy.visit("/categories");
     cy.wait(5000);
-    cy.get(".content a.collection-item", { timeout: 3000 }).should(
+    cy.get(".content a.collection-item", { timeout: 5000 }).should(
       "be.visible"
+    );
+  });
+
+  it("create product for category", () => {
+    let productName = faker.commerce.productName();
+    cy.createProduct(productName);
+    cy.visit(`/categories/${Cypress.env("categoryId")}`);
+    cy.get("a.collection-item span")
+      .eq(0)
+      .should("be.visible")
+      .contains(productName);
+  });
+
+  it("remove the category by id", () => {
+    cy.removeCategoryById();
+    cy.visit(`/categories/${Cypress.env("categoryId")}`).should(
+      "not.be.visible"
     );
   });
 });

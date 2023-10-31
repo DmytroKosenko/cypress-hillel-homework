@@ -49,7 +49,7 @@ Cypress.Commands.add("createNewCategory", (category) => {
 
   cy.request({
     method: "POST",
-    url: "/api/category",
+    url: "api/category",
     body: {
       name: category,
     },
@@ -57,34 +57,46 @@ Cypress.Commands.add("createNewCategory", (category) => {
       authorization: `${accessToken}`,
     },
   }).then((response) => {
+    // steps fot getting the category id for the next iterations
     const categoryId = response.body._id;
-    localStorage.setItem("categoryId", categoryId);
+    // Store the categoryId in Cypress environment variable
+    Cypress.env("categoryId", categoryId);
+
+    return response.body;
   });
 });
 
-Cypress.Commands.add(
-  "createNewProductToCategory",
-  (categoryName, productCost) => {
-    const accessToken = window.localStorage.getItem("auth-token");
-    const categoryId = window.localStorage.getItem("categoryId");
+Cypress.Commands.add("createProduct", (position) => {
+  const accessToken = window.localStorage.getItem("auth-token");
+  const categoryId = Cypress.env("categoryId");
 
-    cy.request({
-      method: "POST",
-      url: "/api/position",
-      body: {
-        category: `${categoryId}`,
-        cost: productCost,
-        name: categoryName,
-      },
-      headers: {
-        authorization: `${accessToken}`,
-      },
-    }).then((response) => {
-      expect(response.status).to.eq(201);
-    });
-  }
-);
-
+  cy.request({
+    method: "POST",
+    url: "api/position",
+    body: {
+      category: categoryId,
+      cost: 1,
+      name: position,
+    },
+    headers: {
+      authorization: `${accessToken}`,
+    },
+  }).then((response) => {
     return response.body;
+  });
+});
+
+Cypress.Commands.add("removeCategoryById", (categoryName, productCost) => {
+  const accessToken = window.localStorage.getItem("auth-token");
+  const categoryId = Cypress.env("categoryId");
+
+  cy.request({
+    method: "DELETE",
+    url: `/api/category/${categoryId}`,
+    headers: {
+      authorization: `${accessToken}`,
+    },
+  }).then((response) => {
+    expect(response.status).to.eq(200);
   });
 });
