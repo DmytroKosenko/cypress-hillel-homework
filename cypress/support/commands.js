@@ -39,7 +39,7 @@ Cypress.Commands.add("loginAndSetLocalStorage", () => {
     },
   }).then((response) => {
     const accessToken = response.body.token;
-    // Store the access token in local
+    // Store the access token in local storage
     localStorage.setItem("auth-token", accessToken);
   });
 });

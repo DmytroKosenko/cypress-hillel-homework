@@ -1,7 +1,3 @@
-//create a command to create a position (product) website URL http://5.189.186.217/login
-//request to create a category (take the category ID from the response)
-//this is another request to create a product (use the category ID in the request)
-//after creating the product, add a UI test to test the created product
 //npm run cy_run_chrome_headed  --spec cypress/e2e/Custom_scenarious/newborn.cy.js
 
 /// <reference types="cypress" />
@@ -31,6 +27,7 @@ describe("Login with API request", () => {
   it("create product for category", () => {
     let productName = faker.commerce.productName();
     cy.createProduct(productName);
+    cy.task("log", productName);
     cy.visit(`/categories/${Cypress.env("categoryId")}`);
     cy.get("a.collection-item span")
       .eq(0)

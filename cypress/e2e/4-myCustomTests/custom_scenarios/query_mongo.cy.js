@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import { faker } from "@faker-js/faker";
 
 //ENV_URL=http://localhost:3000 npm run cy_run_chrome  --spec cypress/e2e/Custom_scenarious/query_mongo.cy.js
 
@@ -10,21 +11,44 @@ describe("find data", () => {
       });
     });
   });
+
   context("UI & API request", () => {
+    it("login by UI", () => {
+      cy.request({
+        method: "POST",
+        url: "/api/users/authenticate",
+        body: {
+          username: "tomsmith",
+          password: "1234567",
+        },
+      }).then((response) => {
+        const authToken = response.body.token;
+        Cypress.env("authTNext13", authToken);
+        expect(response.status).to.eq(200);
+      });
+    });
+
     it("create user", () => {
+      let firstName = faker.person.firstName();
+      let lastName = faker.person.lastName();
       cy.request({
         method: "POST",
         url: "/api/users/register",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NTNlNzhlNTc4OTNmMmM0MzUzYmNhMzAiLCJpYXQiOjE2OTg1OTY0MTQsImV4cCI6MTY5OTIwMTIxNH0.BhbVSMIaVd5zPndcvDfdZYOIfvveXLgPSbofTEbMKck",
+          Authorization: `Bearer ${Cypress.env("authTNext13")}`,
         },
         body: {
-          firstName: "sam",
-          lastName: "smith",
-          username: "samsmith",
+          firstName: firstName,
+          lastName: lastName,
+          username: `${firstName}${lastName}`,
           password: "Qwe1234567",
         },
+      });
+    });
+
+    it("find many", () => {
+      cy.findMany({}, { collection: "users" }).then((mongoResult) => {
+        cy.task("log", mongoResult);
       });
     });
   });
