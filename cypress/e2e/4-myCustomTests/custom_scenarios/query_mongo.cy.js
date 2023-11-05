@@ -31,6 +31,7 @@ describe("find data", () => {
     it("create user", () => {
       let firstName = faker.person.firstName();
       let lastName = faker.person.lastName();
+      let userPassword = faker.internet.password();
       cy.request({
         method: "POST",
         url: "/api/users/register",
@@ -41,7 +42,7 @@ describe("find data", () => {
           firstName: firstName,
           lastName: lastName,
           username: `${firstName}${lastName}`,
-          password: "Qwe1234567",
+          password: userPassword,
         },
       });
     });
