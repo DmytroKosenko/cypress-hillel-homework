@@ -7,3 +7,5 @@ package.json
 yarn.lock
 .vscode/
 cypress.config.js
+cypress/reports/
+cypress/screenshots/
