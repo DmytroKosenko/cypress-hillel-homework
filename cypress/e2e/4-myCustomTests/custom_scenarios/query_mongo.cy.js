@@ -29,9 +29,16 @@ describe("find data", () => {
     });
 
     it("create user", () => {
+      //Homework_lesson_19
+      // create a request to create a user with data from the faker package
+      // fields: firstName, lastName, username, password
+      // after a successful request, add a check to the username field to see if there is a database
+
       let firstName = faker.person.firstName();
       let lastName = faker.person.lastName();
+      let userName = `${firstName}${lastName}`;
       let userPassword = faker.internet.password();
+
       cy.request({
         method: "POST",
         url: "/api/users/register",
@@ -41,9 +48,23 @@ describe("find data", () => {
         body: {
           firstName: firstName,
           lastName: lastName,
-          username: `${firstName}${lastName}`,
+          username: userName,
           password: userPassword,
         },
+      });
+
+      cy.request({
+        method: "GET",
+        url: "/api/users",
+        headers: {
+          Authorization: `Bearer ${Cypress.env("authTNext13")}`,
+        },
+      }).then((response) => {
+        const createdUsers = response.body;
+        const newUserCreated = createdUsers.some(
+          (item) => item.username === userName
+        );
+        expect(newUserCreated).to.be.true;
       });
     });
 
