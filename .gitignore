@@ -9,3 +9,4 @@ yarn.lock
 cypress.config.js
 cypress/reports/
 cypress/screenshots/
+.eslintrc.js
