@@ -4,7 +4,6 @@ mochawesome-report/
 .yarnrc.yml
 yarn.lock
 .vscode/
-cypress.config.js
 cypress/reports/
 cypress/screenshots/
 .eslintrc.js
