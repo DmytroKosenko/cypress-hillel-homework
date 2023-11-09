@@ -8,7 +8,7 @@ jobs:
     name: trigger in chrome
     steps:
       - uses: actions/checkout@v3
-      - uses: cypress-io/github-actions@v5
+      - uses: cypress-io/github-action@v5
         with:
           browser: chrome
           spec: cypress/e2e/4-myCustomTests/custom_scenarios/guru_testing.cy.js
