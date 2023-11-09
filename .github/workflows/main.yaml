@@ -11,3 +11,4 @@ jobs:
       - uses: cypress-io/github-actions@v5
         with:
           browser: chrome
+          spec: cypress/e2e/4-myCustomTests/custom_scenarios/guru_testing.cy.js

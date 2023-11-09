@@ -3,6 +3,8 @@ import MainPage from "../../../pages/main";
 import PostmanPage from "../../../pages/postman-page";
 import { global_data } from "../../../data/global_text";
 
+//npm run cy_run_chrome_headed --spec cypress/e2e/Custom_scenarious/guru_testing.cy.js
+
 describe("Testing Guru Website", () => {
   const mainpage = new MainPage();
   const postmanPage = new PostmanPage();
@@ -10,6 +12,8 @@ describe("Testing Guru Website", () => {
   beforeEach(() => {
     // cy.visit('https://www.guru99.com')
     // cy.setCookie('authCoka', 'someCookie')
+    const BaseUrl = Cypress.env("guruTestingUrl");
+    Cypress.config("baseUrl", BaseUrl);
     cy.loginAndSetCookie("/", "authCoka", "someCookie");
   });
 
@@ -18,7 +22,7 @@ describe("Testing Guru Website", () => {
     cy.wait(4000);
   });
 
-  it.skip("check search and validate results", () => {
+  it("check search and validate results", () => {
     cy.get("button.search-toggle-open")
       .should("be.visible")
       .and("have.attr", "data-toggle-target", "#search-drawer")
@@ -31,7 +35,7 @@ describe("Testing Guru Website", () => {
     cy.get("div#resInfo-0").should("not.be.empty").and("contain", "About");
   });
 
-  it.skip("Click on softwear testing variant from drop-down list", () => {
+  it("Click on softwear testing variant from drop-down list", () => {
     cy.get("#primary-menu span.nav-drop-title-wrap").eq(0).click();
     // cy.get('a[aria-current="page"] + ul.sub-menu.clicked').should('be.visible') doesn't work
     cy.get("ul.sub-menu.clicked li")
@@ -78,7 +82,7 @@ describe("Testing Guru Website", () => {
     cy.get("table.table").eq(0).pause();
   });
 
-  it("Click on Postman linck from drop-down list POM", () => {
+  it.skip("Click on Postman link from drop-down list POM", () => {
     mainpage.dropDownList().eq(0).click().pause();
     mainpage
       .elementInDropDownList()
