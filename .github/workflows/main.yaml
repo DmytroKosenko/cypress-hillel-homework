@@ -1,14 +1,17 @@
-name: Trigger e2e UI tests
+name: Trigger e2e UI tests on Docker
 
 on: push
 
 jobs:
-  chrome:
+  build:
     runs-on: ubuntu-latest
-    name: trigger in chrome
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
-        with:
-          browser: chrome
-          spec: cypress/e2e/4-myCustomTests/custom_scenarios/guru_testing.cy.js
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1:latest .
+
+      - name: Run tests in Docker container
+        run: docker run -it -v "C:/Users/Dmytro Kosenko/OneDrive/Рабочий стол/QA Automation JS Course/0. Course/homework:/e2e" -w /e2e cypress/included:13.2.0 npm run cy_run_chrome_headed spec cypress/e2e/Custom_scenarious/guru_testing.cy.js
