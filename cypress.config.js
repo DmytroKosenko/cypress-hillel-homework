@@ -1,10 +1,10 @@
 const { defineConfig } = require("cypress");
-//const { configurePlugin } = require("cypress-mongodb");
-const {
-  beforeRunHook,
-  afterRunHook,
-} = require("cypress-mochawesome-reporter/lib");
-const fs = require("fs-extra");
+// const { configurePlugin } = require("cypress-mongodb");
+// const {
+//   beforeRunHook,
+//   afterRunHook,
+// } = require("cypress-mochawesome-reporter/lib");
+// const fs = require("fs-extra");
 
 module.exports = defineConfig({
   env: {
