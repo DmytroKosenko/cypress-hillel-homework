@@ -28,7 +28,7 @@ module.exports = defineConfig({
     viewportWidth: 1400,
     defaultCommandTimeout: 4000,
     specPattern:
-      "cypress/e2e/4-myCustomTests/custom_scenarios/guru_testing.cy.js", //query_mongo newborn
+      "cypress/e2e/4-myCustomTests/custom_scenarios/guru_testing.cy.js", //query_mongo newborn test
     // baseUrl: "https://www.cypress.io",
     // retries: {
     //   openMode: 2,
