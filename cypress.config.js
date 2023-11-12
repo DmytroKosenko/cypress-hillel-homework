@@ -4,7 +4,7 @@ const {
   beforeRunHook,
   afterRunHook,
 } = require("cypress-mochawesome-reporter/lib");
-//const fs = require("fs-extra");
+const fs = require("fs-extra");
 
 module.exports = defineConfig({
   env: {
