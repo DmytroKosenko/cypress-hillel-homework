@@ -1,5 +1,5 @@
 const { defineConfig } = require("cypress");
-const { configurePlugin } = require("cypress-mongodb");
+//const { configurePlugin } = require("cypress-mongodb");
 const {
   beforeRunHook,
   afterRunHook,
