@@ -17,4 +17,3 @@ jobs:
       - uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          spec: docker run -it -v "C:/Users/Dmytro Kosenko/OneDrive/Рабочий стол/QA Automation JS Course/0. Course/homework:/e2e" -w /e2e cypress/included:13.2.0 npm run cy_run_chrome_headed spec cypress/e2e/Custom_scenarious/newborn.cy.js
