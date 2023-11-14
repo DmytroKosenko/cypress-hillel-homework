@@ -17,3 +17,14 @@ jobs:
       - uses: cypress-io/github-action@v6
         with:
           browser: chrome
+      - name: Save report
+        uses: actions/upload-artifact@v3
+        with:
+          path: cypress/reports/html
+          name: Main report
+        if: failure() || success()
+      - name: Get report
+        uses: actions/download-artifact@v3
+        with:
+          name: Main report
+        if: failure() || success()
