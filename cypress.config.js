@@ -1,10 +1,10 @@
 const { defineConfig } = require("cypress");
-const fs = require("fs-extra");
 const { configurePlugin } = require("cypress-mongodb");
 const {
   beforeRunHook,
   afterRunHook,
 } = require("cypress-mochawesome-reporter/lib");
+const fs = require("fs-extra");
 
 module.exports = defineConfig({
   env: {
@@ -28,7 +28,7 @@ module.exports = defineConfig({
     viewportWidth: 1400,
     defaultCommandTimeout: 4000,
     specPattern:
-      "cypress/e2e/4-myCustomTests/custom_scenarios/guru_testing.cy.js", //query_mongo newborn test
+      "cypress/e2e/4-myCustomTests/custom_scenarios/guru_testing.cy.js", //query_mongo newborn
     // baseUrl: "https://www.cypress.io",
     // retries: {
     //   openMode: 2,
